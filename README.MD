@@ -45,4 +45,4 @@ Features mentioned here are likely to be added in a future version
 * **Felix Lambert**
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.MD) file for details

@@ -30,15 +30,26 @@
 	</div>
 	<div id="content">
 		<?php
-			$devices = parse_ini_file('devices.ini');
-			$keylist = array_keys($devices);
-			
-			foreach($keylist as $device) {
+			const file_name_devicesini = 'devices.ini';
+
+			if(file_exists(file_name_devicesini)) {
+				$devices = parse_ini_file(file_name_devicesini);
+				$keylist = array_keys($devices);
+				
+				foreach($keylist as $device) {
+					echo '<div class="card">';
+					echo '	<div class="wolpanel" onclick="wakeUpWithWOL(\'' . $device . '\',\'' . $devices[$device] . '\')">';
+					echo '		<div class="infopanel" >';
+					echo '			<b>' . $device . '</b><br />';
+					echo '			' . $devices[$device] . '</div>';
+					echo '		</div>';
+					echo '	</div>';
+				}
+			} else {
 				echo '<div class="card">';
-				echo '	<div class="wolpanel" onclick="wakeUpWithWOL(\'' . $device . '\',\'' . $devices[$device] . '\')">';
+				echo '	<div class="wolpanel">';
 				echo '		<div class="infopanel" >';
-				echo '			<b>' . $device . '</b><br />';
-				echo '			' . $devices[$device] . '</div>';
+				echo '			<b>No devices.ini found.</b>';
 				echo '		</div>';
 				echo '	</div>';
 			}
