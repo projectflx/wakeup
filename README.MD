@@ -10,6 +10,7 @@ A simple website to send a magic packet to a given device.
 The following packages are needed to run the website
 * apache2
 * php7
+    * extension 'sockets' enabled
 
 ## Installation
 A step by step guide will be added soon.
