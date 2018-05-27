@@ -26,7 +26,7 @@ gulp.task('copyLicense', function() {
 
 gulp.task('zipDist', function() {
     // Zipping the distribution folder
-    return gulp.src('dist/**').pipe(zip('wakeup-vX.X.zip')).pipe(gulp.dest('dist'));
+    return gulp.src('dist/**').pipe(zip('wakeup-vX.X.X.zip')).pipe(gulp.dest('dist'));
 });
 
 gulp.task('default', ['copyApp', 'copyDependencies', 'copyLicense', 'zipDist']);
