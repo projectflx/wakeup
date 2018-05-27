@@ -2,16 +2,14 @@ function wakeUpWithWOL(host, mac) {
     $.ajax({
         type: 'POST',
         url: 'wol.php',
-        data:{MAC:mac},
+        data:{
+            MAC:mac
+        },
         success: function(data) {
-            if(data == -1) {
-                showNotifyBox( mac.concat(' is not a valid MAC.'), 'danger');
-            } else if (data == -2) {
-                showNotifyBox( 'The OS you are running this site on is not supported.', 'danger');
-            } else if (data == -3) {
-                showNotifyBox('Wrong call of the function WakeOnLan.', 'danger');
-            } else {
+            if(data == 0) {
                 showNotifyBox('Magic Packet send to '.concat(host).concat('.'), 'success');
+            } else {
+                showNotifyBox( data, 'danger');
             }
         }
     });

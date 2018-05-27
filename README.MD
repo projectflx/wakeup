@@ -1,5 +1,5 @@
 # WakeUp!
-A simple website for linux to send a magic packet to a given device.
+A simple website to send a magic packet to a given device.
 
 ## Features
 * Organize devices you want to send a magic packet to
@@ -10,7 +10,6 @@ A simple website for linux to send a magic packet to a given device.
 The following packages are needed to run the website
 * apache2
 * php7
-* wol
 
 ## Installation
 A step by step guide will be added soon.

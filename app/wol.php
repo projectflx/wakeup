@@ -5,19 +5,25 @@
     */
     function WakeOnLan($mac_address) {
         // Check if the MAC address is valid
-        if(preg_match('/([a-fA-F0-9]{2}[:|\-]?){6}/',$mac_address)) {
-            // Check the OS the webserver is run on (must be linux at the moment)
-            if (strtoupper(substr(PHP_OS, 0, 3)) <> 'WIN' and strtoupper(PHP_OS) <> 'DARWIN') {
-                $exec_string = 'wol ' . $mac_address;
-                exec($exec_string, $output, $return);
-                return $output;
-            } else {
-                //error code for a OS mismatch
-                return -2;
-            }
+        if(preg_match('/^([a-fA-F0-9]{2}:){5}[a-fA-F0-9]{2}$/',$mac_address)) {
+            // Remove unwanted chars and convert to binary
+            $binaryMAC = pack('H12', str_replace(':','', $mac_address));
+
+            // Build packet
+            $magicPacket = str_repeat(chr(0xff), 6).str_repeat($binaryMAC, 16);
+
+            if (!$socket = fsockopen('udp://255.255.255.255', 40000, $errno, $errstr, 2)) {
+                // Opening the UDP socket was not successful
+                return 'Opening the UDP socket was not successful';
+             }
+
+             // Write packet to the stream and close it
+             fputs($socket, $magicPacket);
+             fclose($socket);
+             return 0;
         } else {
             // error code for an invalid MAC
-            return -1;
+            return 'The MAC address entered is invalid.';
         }
     }
 
@@ -26,6 +32,6 @@
         echo WakeOnLan($_POST['MAC']);
     } else {
         // error code for the information not handed over to the function
-        echo -3;
+        echo 'POST value \'MAC\' not set.';
     }
  ?>
