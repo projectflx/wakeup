@@ -26,7 +26,9 @@
 	
 	<!-- content -->
 	<div id="banner">
-		<a href="index.php" id="logo"><img src="img/favicon.png" height="32" width="32"></a>
+		<a href="index.php" id="logo">
+			<img src="img/logo.png">
+		</a>
 	</div>
 	<div id="content">
 		<?php
