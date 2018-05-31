@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/colors.css">
 
 	<title>WakeUp!</title>
 </head>

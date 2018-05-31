@@ -1,6 +1,8 @@
 var gulp = require('gulp');
+var gulpSequence = require('gulp-sequence')
 var rename = require('gulp-rename');
 var zip = require('gulp-zip');
+var del = require('del');
 
 gulp.task('copyApp', function() {
     // Copy app into dist
@@ -24,9 +26,14 @@ gulp.task('copyLicense', function() {
     return gulp.src('LICENSE.MD').pipe(rename('License.txt')).pipe(gulp.dest('dist'));
 });
 
+gulp.task('cleanDist', function() {
+    // Cleaning the distribution folder
+    return del('dist/**');
+});
+
 gulp.task('zipDist', function() {
     // Zipping the distribution folder
     return gulp.src('dist/**').pipe(zip('wakeup-vX.X.X.zip')).pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['copyApp', 'copyDependencies', 'copyLicense', 'zipDist']);
+gulp.task('default', gulpSequence('cleanDist','copyApp', 'copyDependencies', 'copyLicense',  'zipDist'));

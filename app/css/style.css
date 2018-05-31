@@ -1,15 +1,8 @@
-:root {
-	--padding-in-card: 6px;
-	--color-background: #F8F8F8;
-	--color-card: #F1654C;
-	--color-card-hover: #FC6042;
-	--color-card-active: #D6523C;
-	--color-menu: #F1654C;
-	--color-text: #FFFFFF;
-	--color-statuspoint-inactive: #858585;
-	--color-statuspoint-success: #00FF00;
-	--color-statuspoint-fail: #FF0000;
-}
+/*
+
+	Styles for the website
+
+*/
 
 /* bootstrap-notify changes */
 .alert {
@@ -25,15 +18,9 @@
 
 /* Small screens (default) */
 
-body {
-	color: var(--color-text);
-	background-color: var(--color-background);
-}
-
 #banner {
 	width: auto;
 	height: 50px;
-	background-color: var(--color-menu);
 }
 
 #banner a:hover {
@@ -63,7 +50,6 @@ body {
 .card {
 	width: calc(100% - 20px);
 	height: 80px;
-	background-color: var(--color-card);
 
 	border-style: none;
 	border-radius: 0px;
@@ -97,18 +83,10 @@ body {
 	font-size: 20px;
 }
 
-.wolpanel:hover {
-	background-color: var(--color-card-hover);
-}
-
-.wolpanel:active {
-	background-color:  var(--color-card-active);
-}
-
 .infopanel {
 	position: absolute;
 	bottom: 0;
-	padding: var(--padding-in-card);
+	padding: 6px;
 }
 
 /* Medium screens (640px) */

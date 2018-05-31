@@ -1,0 +1,26 @@
+/*
+
+	Styles for the website
+
+*/
+
+body {
+	color: #FFFFFF;
+	background-color: #F8F8F8;
+}
+
+#banner {
+	background-color: #F1654C;
+}
+
+.card {
+    background-color: #F1654C;
+}
+
+.wolpanel:hover {
+	background-color: #FC6042;
+}
+
+.wolpanel:active {
+	background-color:  #D6523C;
+}
