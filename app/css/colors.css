@@ -17,6 +17,11 @@ body {
     background-color: #F1654C;
 }
 
+.grouptitle {
+	color: #F1654C;
+	border-bottom-color: #F1654C;
+}
+
 .wolpanel:hover {
 	background-color: #FC6042;
 }

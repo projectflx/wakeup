@@ -33,28 +33,58 @@
 	</div>
 	<div id="content">
 		<?php
+
 			const file_name_devicesini = 'devices.ini';
 
-			if(file_exists(file_name_devicesini)) {
-				$devices = parse_ini_file(file_name_devicesini);
-				$keylist = array_keys($devices);
-				
-				foreach($keylist as $device) {
-					echo '<div class="card">';
-					echo '	<div class="wolpanel" onclick="wakeUpWithWOL(\'' . $device . '\',\'' . $devices[$device] . '\')">';
-					echo '		<div class="infopanel" >';
-					echo '			<b>' . $device . '</b><br />';
-					echo '			' . $devices[$device] . '</div>';
-					echo '		</div>';
-					echo '	</div>';
+			// function for printing a device card
+			function printDevice($device, $mac) {
+				echo '<div class="card">';
+				echo '	<div class="wolpanel" onclick="wakeUpWithWOL(\'' . $device . '\',\'' . $mac . '\')">';
+				echo '		<div class="infopanel" >';
+				echo '			<b>' . $device . '</b><br />';
+				echo '			' . $mac . '</div>';
+				echo '		</div>';
+				echo '	</div>';
+			}
+
+			// function for printing a group container with devices in it
+			function printDeviceGroup($array, $title) {
+				$subkeylist = array_keys($array);
+
+				echo '<div class="groupcontainer">';
+				echo '<div class="grouptitle">' . $title . '</div>';
+
+				foreach($subkeylist as $subdevice) {
+					printDevice($subdevice, $array[$subdevice]);
 				}
-			} else {
+
+				echo '	</div>';
+			}
+
+			// function for displaying an error message
+			function printErrorMessage($error_message) {
 				echo '<div class="card">';
 				echo '	<div class="wolpanel">';
 				echo '		<div class="infopanel" >';
-				echo '			<b>No devices.ini found.</b>';
+				echo '			<b>' . $error_message . '</b>';
 				echo '		</div>';
 				echo '	</div>';
+			}
+
+			if(file_exists(file_name_devicesini)) {
+
+				$devices = parse_ini_file(file_name_devicesini, TRUE);
+				$keylist = array_keys($devices);
+				
+				foreach($keylist as $device) {
+					if(is_array($devices[$device])) {
+						printDeviceGroup($devices[$device], $device);
+					} else {
+						printDevice($device, $devices[$device]);
+					}
+				}
+			} else {
+				printErrorMessage('No devices.ini found.');
 			}
 		?>
 	</div>
