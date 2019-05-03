@@ -1,5 +1,10 @@
 <?php
     /*
+        Nesessary includes
+    */
+    include 'config.php';
+
+    /*
         function for sending a magic packet to a device specifying the MAC-address
 
     */
@@ -13,7 +18,6 @@
                 // Build packet
                 $magicPacket = str_repeat(chr(0xff), 6).str_repeat($binaryMAC, 16);
 
-                //if (!$socket = fsockopen('udp://255.255.255.255', 40000, $errno, $errstr, 2)) {
                 if (!$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP)) {
                     // Opening the UDP socket was not successful
                     return 'Opening the UDP socket was not successful: Error ' . socket_last_error($socket) . '. ' . socket_strerror(socket_last_error($socket));
@@ -23,7 +27,7 @@
                     return 'Setting the socket options failed. ' . socket_strerror($socket_options);
                 }
 
-                if(socket_sendto($socket, $magicPacket, strlen($magicPacket), 0, '255.255.255.255', 40000) == -1) {
+                if(socket_sendto($socket, $magicPacket, strlen($magicPacket), 0, $broadcastaddress, 40000) == -1) {
                     return 'Error while sending the packet.';
                 }
                 return 0;
