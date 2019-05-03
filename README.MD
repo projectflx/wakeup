@@ -12,14 +12,8 @@ The following packages are needed to run the website
 * php7
     * extension 'sockets' enabled
 
-## Installation
-A step by step guide will be added soon.
-
 ### Customizing
-Will be added with the installation guide.
-
-## Developing on your own
-A step by step guide will be added soon.
+* The broadcast address can be customized in the config.php
 
 ## Built With
 The following libraries were used.
@@ -35,11 +29,10 @@ The following libraries were used.
 * [animate.css](https://daneden.github.io/animate.css/) - Animations
 * [normalize.css](https://necolas.github.io/normalize.css/) - A modern, HTML5-ready alternative to CSS resets
 
-## TODO
+## Planned Features
 Features mentioned here are likely to be added in a future version
 * Proper database support for devices (in addition to the ini-model)
 * Editing devices on the website
-* Device Grouping
 
 ## Author
 * **Felix Lambert**
