@@ -1,7 +1,7 @@
 var gulp = require('gulp');
-var gulpSequence = require('gulp-sequence')
 var rename = require('gulp-rename');
 var zip = require('gulp-zip');
+var merge = require('merge-stream');
 var del = require('del');
 
 gulp.task('copyApp', function() {
@@ -11,14 +11,15 @@ gulp.task('copyApp', function() {
 
 gulp.task('copyDependencies', function() {
     // Copy css
-    gulp.src('node_modules/normalize.css/normalize.css').pipe(gulp.dest('dist/app/css'));
-    gulp.src('node_modules/bootstrap/dist/css/bootstrap.css').pipe(gulp.dest('dist/app/css'));
-    gulp.src('node_modules/animate.css/animate.css').pipe(gulp.dest('dist/app/css'));
+    var normalizecss = gulp.src('node_modules/normalize.css/normalize.css').pipe(gulp.dest('dist/app/css'));
+    var bootstrapcss = gulp.src('node_modules/bootstrap/dist/css/bootstrap.css').pipe(gulp.dest('dist/app/css'));
+    var animatecss = gulp.src('node_modules/animate.css/animate.css').pipe(gulp.dest('dist/app/css'));
 
     // Copy javascript
-    gulp.src('node_modules/bootstrap/dist/js/bootstrap.js').pipe(gulp.dest('dist/app/js'));
-    gulp.src('node_modules/jquery/dist/jquery.js').pipe(gulp.dest('dist/app/js'));
-    gulp.src('node_modules/bootstrap-notify/bootstrap-notify.js').pipe(gulp.dest('dist/app/js'));
+    var bootstrapjs = gulp.src('node_modules/bootstrap/dist/js/bootstrap.js').pipe(gulp.dest('dist/app/js'));
+    var jqueryjs = gulp.src('node_modules/jquery/dist/jquery.js').pipe(gulp.dest('dist/app/js'));
+    var bootstrapnotifyjs = gulp.src('node_modules/bootstrap-notify/bootstrap-notify.js').pipe(gulp.dest('dist/app/js'));
+    return merge(normalizecss, bootstrapcss, animatecss, bootstrapjs, jqueryjs, bootstrapnotifyjs);
 });
 
 gulp.task('copyLicense', function() {
@@ -36,4 +37,4 @@ gulp.task('zipDist', function() {
     return gulp.src('dist/app/**').pipe(zip('wakeup-vX.X.X.zip')).pipe(gulp.dest('dist/release'));
 });
 
-gulp.task('default', gulpSequence('cleanDist','copyApp', 'copyDependencies', 'copyLicense',  'zipDist'));
+gulp.task('default', gulp.series('cleanDist','copyApp', 'copyDependencies', 'copyLicense',  'zipDist'));
