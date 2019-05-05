@@ -1,14 +1,13 @@
 <?php
-    /*
-        Nesessary includes
-    */
-    include 'config.php';
 
     /*
         function for sending a magic packet to a device specifying the MAC-address
 
     */
     function WakeOnLan($mac_address) {
+        // Including needed variables
+        include 'config.php';
+
         // Check if the MAC address is valid
         if(extension_loaded('sockets')) {
             if(preg_match('/^([a-fA-F0-9]{2}:){5}[a-fA-F0-9]{2}$/',$mac_address)) {
